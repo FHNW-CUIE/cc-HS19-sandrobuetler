@@ -1,7 +1,10 @@
 package cuie.sandroBuetler_andreasRohr.template_businesscontrol;
 
+
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
 
 
 class DropDownChooser extends VBox {
@@ -11,6 +14,10 @@ class DropDownChooser extends VBox {
     private final BusinessControl businessControl;
 
     private Label tobeReplacedLabel;
+
+    private Image liftboy;
+    private ImageView boy;
+
 
     DropDownChooser(BusinessControl businessControl) {
         this.businessControl = businessControl;
@@ -32,10 +39,14 @@ class DropDownChooser extends VBox {
 
     private void initializeParts() {
         tobeReplacedLabel = new Label("to be replaced");
+        liftboy = new Image("pictures/liftboy.jpg");
+        boy = new ImageView(liftboy);
+
+
     }
 
     private void layoutParts() {
-        getChildren().addAll(tobeReplacedLabel);
+        getChildren().addAll(tobeReplacedLabel, boy);
     }
 
     private void setupBindings() {
