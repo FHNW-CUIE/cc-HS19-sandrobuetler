@@ -3,7 +3,6 @@ package cuie.sandroBuetler_andreasRohr.template_businesscontrol;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,10 +11,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 
 
 class
@@ -33,8 +36,9 @@ DropDownChooser extends BorderPane {
     private HBox fourthRow = new HBox();
 
 
-    private Image liftboy;
-    private ImageView liftboyView;
+    private Image elevatorBoy;
+    private ImageView elevatorBoyView;
+
 
 
     private Label nameLabel;
@@ -65,6 +69,8 @@ DropDownChooser extends BorderPane {
     private void initializeSelf() {
         getStyleClass().add("drop-down-chooser");
 
+
+
         String fonts = getClass().getResource(FONTS_CSS).toExternalForm();
         getStylesheets().add(fonts);
 
@@ -88,15 +94,39 @@ DropDownChooser extends BorderPane {
         alarmButton = new Button();
         clearButton = new Button("C");
 
-        liftboy = new Image("pictures/liftboy.jpg");
-        liftboyView = new ImageView(liftboy);
+        elevatorBoy = new Image("pictures/elevatorBoy.png");
+        elevatorBoyView = new ImageView(elevatorBoy);
+
+
+
+
+        floorLabel.getStyleClass().add("floor-label");
+        nameLabel.getStyleClass().add("name-label");
+
+        zeroButton.getStyleClass().add("button");
+        oneButton.getStyleClass().add("button");
+        twoButton.getStyleClass().add("button");
+        threeButton.getStyleClass().add("button");
+        fourButton.getStyleClass().add("button");
+        fiveButton.getStyleClass().add("button");
+        sixButton.getStyleClass().add("button");
+        sevenButton.getStyleClass().add("button");
+        eightButton.getStyleClass().add("button");
+        nineButton.getStyleClass().add("button");
+        clearButton.getStyleClass().add("button");
+        alarmButton.getStyleClass().add("button-alarm");
+
+        terminal.setSpacing(10);
+        firstRow.setSpacing(10);
+        secondRow.setSpacing(10);
+        thirdRow.setSpacing(10);
+        fourthRow.setSpacing(10);
+
+//        nameLabel.setMinWidth();
 
     }
 
     private void layoutParts() {
-
-
-
 
 
         firstRow.getChildren().addAll(sevenButton, eightButton, nineButton);
@@ -104,15 +134,11 @@ DropDownChooser extends BorderPane {
         thirdRow.getChildren().addAll(oneButton, twoButton, threeButton);
         fourthRow.getChildren().addAll(alarmButton, zeroButton, clearButton);
 
+        terminal.getChildren().addAll(floorLabel, firstRow, secondRow, thirdRow, fourthRow);
 
-
-        terminal.getChildren().addAll(nameLabel, floorLabel, firstRow, secondRow, thirdRow, fourthRow);
-
-
-        setLeft(liftboyView);
+        setTop(nameLabel);
+        setLeft(elevatorBoyView);
         setRight(terminal);
-
-        //getChildren().addAll(terminal);
 
     }
 
@@ -174,12 +200,21 @@ DropDownChooser extends BorderPane {
                 e2.printStackTrace();
             }
 
+            Media m = new Media(Paths.get("music/elevatorMusic.mp3").toUri().toString());
+            new MediaPlayer(m).play();
         });
+
+
+       //     elevatorMusic.play();
+
+
     }
 
 
     private void setupBindings() {
         floorLabel.textProperty().bind(businessControl.userFacingTextProperty());
+        nameLabel.textProperty().bind(businessControl.labelProperty());
+
     }
 
 
