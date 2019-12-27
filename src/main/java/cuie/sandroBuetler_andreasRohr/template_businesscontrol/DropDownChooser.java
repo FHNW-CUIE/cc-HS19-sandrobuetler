@@ -52,6 +52,7 @@ DropDownChooser extends BorderPane {
         initializeSelf();
         initializeParts();
         layoutParts();
+        setupEventHandlers();
         setupBindings();
     }
 
@@ -109,6 +110,13 @@ DropDownChooser extends BorderPane {
 
     }
 
+    private void setupEventHandlers(){
+        clearButton.setOnAction(event -> {
+            businessControl.userFacingTextProperty().setValue("0");
+        });
+    }
+
     private void setupBindings() {
+        floorLabel.textProperty().bind(businessControl.userFacingTextProperty());
     }
 }
