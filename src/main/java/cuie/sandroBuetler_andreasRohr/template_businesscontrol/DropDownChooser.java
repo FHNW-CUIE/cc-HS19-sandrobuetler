@@ -142,7 +142,6 @@ DropDownChooser extends BorderPane {
 
     }
 
-
     private void setupEventHandlers(){
         oneButton.setOnAction(event -> {
             buttonPush("1");
