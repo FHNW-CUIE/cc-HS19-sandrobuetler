@@ -2,7 +2,8 @@
 
 === Bearbeitet von
 
-* Vorname, Nachname
+* Sandro Bütler
+* Andreas Rohr
 
 === Integriert in die OOP2-Projekte von
 
