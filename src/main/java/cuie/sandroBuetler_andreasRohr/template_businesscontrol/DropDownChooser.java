@@ -3,6 +3,7 @@ package cuie.sandroBuetler_andreasRohr.template_businesscontrol;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,6 +11,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 class
@@ -68,7 +74,7 @@ DropDownChooser extends BorderPane {
 
     private void initializeParts() {
         nameLabel = new Label("name");
-        floorLabel = new Label("floor");
+        floorLabel = new Label("0");
         zeroButton = new Button("0");
         oneButton = new Button("1");
         twoButton = new Button("2");
@@ -111,12 +117,76 @@ DropDownChooser extends BorderPane {
     }
 
     private void setupEventHandlers(){
+        oneButton.setOnAction(event -> {
+            buttonPush("1");
+        });
+
+        twoButton.setOnAction(event -> {
+            buttonPush("2");
+        });
+
+        threeButton.setOnAction(event -> {
+            buttonPush("3");
+        });
+
+
+        fourButton.setOnAction(event -> {
+            buttonPush("4");
+        });
+
+        fiveButton.setOnAction(event -> {
+            buttonPush("5");
+        });
+
+        sixButton.setOnAction(event -> {
+            buttonPush("6");
+        });
+
+        sevenButton.setOnAction(event -> {
+            buttonPush("7");
+        });
+
+        eightButton.setOnAction(event -> {
+            buttonPush("8");
+        });
+
+        nineButton.setOnAction(event -> {
+            buttonPush("9");
+        });
+
+        zeroButton.setOnAction(event -> {
+            buttonPush("0");
+        });
+
+
         clearButton.setOnAction(event -> {
             businessControl.userFacingTextProperty().setValue("0");
         });
+
+
+        alarmButton.setOnAction(event -> {
+            try {
+                Desktop.getDesktop().browse(new URI("https://www.schindler.com/ch/internet/de/ueber-schindler-schweiz/kontakt.html#button"));
+            } catch (IOException e1){
+                e1.printStackTrace();
+            }catch (URISyntaxException e2){
+                e2.printStackTrace();
+            }
+
+        });
     }
+
 
     private void setupBindings() {
         floorLabel.textProperty().bind(businessControl.userFacingTextProperty());
+    }
+
+
+    private void buttonPush(String number){
+        if (businessControl.userFacingTextProperty().getValue() =="0"){
+            businessControl.userFacingTextProperty().setValue(number);
+        }else {
+            businessControl.userFacingTextProperty().setValue(businessControl.userFacingTextProperty().getValue() + number);
+        }
     }
 }
