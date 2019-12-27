@@ -1,4 +1,4 @@
-package cuie.project.template_businesscontrol.demo;
+package cuie.sandroBuetler_andreasRohr.template_businesscontrol.demo;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
