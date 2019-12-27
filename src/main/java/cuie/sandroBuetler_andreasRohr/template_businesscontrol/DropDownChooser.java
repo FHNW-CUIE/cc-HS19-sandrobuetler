@@ -1,5 +1,7 @@
 package cuie.sandroBuetler_andreasRohr.template_businesscontrol;
 
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -8,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
 
 import java.awt.*;
 import java.io.IOException;
@@ -48,9 +51,6 @@ DropDownChooser extends BorderPane {
     private Button nineButton;
     private Button alarmButton;
     private Button clearButton;
-
-
-
 
 
     DropDownChooser(BusinessControl businessControl) {
@@ -98,6 +98,7 @@ DropDownChooser extends BorderPane {
 
 
 
+
         firstRow.getChildren().addAll(sevenButton, eightButton, nineButton);
         secondRow.getChildren().addAll(fourButton, fiveButton, sixButton);
         thirdRow.getChildren().addAll(oneButton, twoButton, threeButton);
@@ -112,6 +113,7 @@ DropDownChooser extends BorderPane {
         setRight(terminal);
 
         //getChildren().addAll(terminal);
+
     }
 
 
