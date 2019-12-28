@@ -5,20 +5,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
+
 
 
 class
@@ -191,6 +188,14 @@ DropDownChooser extends BorderPane {
 
 
         alarmButton.setOnAction(event -> {
+
+            String musicFile = "src/main/resources/music/elevatorMusic.wav";
+
+            Media sound = new Media(new File(musicFile).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+
+
             try {
                 Desktop.getDesktop().browse(new URI("https://www.schindler.com/ch/internet/de/ueber-schindler-schweiz/kontakt.html#button"));
             } catch (IOException e1){
@@ -199,13 +204,7 @@ DropDownChooser extends BorderPane {
                 e2.printStackTrace();
             }
 
-            Media m = new Media(Paths.get("music/elevatorMusic.mp3").toUri().toString());
-            new MediaPlayer(m).play();
         });
-
-
-       //     elevatorMusic.play();
-
 
     }
 
