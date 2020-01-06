@@ -31,10 +31,8 @@ import javafx.stage.Popup;
 import javafx.util.Duration;
 
 public class Liftboy extends Control {
-    private static final PseudoClass INVALID_CLASS   = PseudoClass.getPseudoClass("invalid");
-
     static final String FORMATTED_INTEGER_PATTERN = "%,d";
-
+    private static final PseudoClass INVALID_CLASS   = PseudoClass.getPseudoClass("invalid");
     private static final String INTEGER_REGEX    = "[+-]?[\\d']{1,14}";
     private static final Pattern INTEGER_PATTERN = Pattern.compile(INTEGER_REGEX);
 
@@ -49,8 +47,6 @@ public class Liftboy extends Control {
     };
 
     private final StringProperty  label        = new SimpleStringProperty();
-    private final StringProperty  errorMessage = new SimpleStringProperty();
-
 
     public Liftboy() {
         initializeSelf();
@@ -80,17 +76,14 @@ public class Liftboy extends Control {
         userFacingText.addListener((observable, oldValue, userInput) -> {
             if (isInteger(userInput)) {
                 setInvalid(false);
-                setErrorMessage(null);
                 setValue(convertToInt(userInput));
             } else {
                 setInvalid(true);
-                setErrorMessage("Nur Zahlen erlaubt!");
             }
         });
 
-        valueProperty().addListener((observable, oldValue, newValue) -> {
+        stockwerkProperty().addListener((observable, oldValue, newValue) -> {
             setInvalid(false);
-            setErrorMessage(null);
             setUserFacingText(convertToString(newValue.intValue()));
         });
     }
@@ -113,15 +106,15 @@ public class Liftboy extends Control {
         return value.get();
     }
 
-    public IntegerProperty valueProperty() {
-        return value;
-    }
-
     public void setValue(int value) {
         this.value.set(value);
     }
 
-    public StringProperty labelProperty() {
+    public IntegerProperty stockwerkProperty() {
+        return value;
+    }
+
+    public StringProperty buildingNameProperty() {
         return label;
     }
 
@@ -131,10 +124,6 @@ public class Liftboy extends Control {
 
     public void setInvalid(boolean invalid) {
         this.invalid.set(invalid);
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage.set(errorMessage);
     }
 
     public StringProperty userFacingTextProperty() {
@@ -152,38 +141,16 @@ class LiftboySkin extends SkinBase<Liftboy> {
 
     private static final String ANGLE_DOWN = "\uf107";
     private static final String ANGLE_UP   = "\uf106";
-
-    private enum State {
-        VALID("Valid",      "valid.png"),
-        INVALID("Invalid",  "invalid.png");
-
-        public final String    text;
-        public final ImageView imageView;
-
-        State(final String text, final String file) {
-            this.text = text;
-            String url = LiftboySkin.class.getResource("/icons/" + file).toExternalForm();
-            this.imageView = new ImageView(new Image(url,
-                    IMG_SIZE, IMG_SIZE,
-                    true, false));
-        }
-    }
-
     private static final String FONTS_CSS = "/fonts/fonts.css";
-    private static final String STYLE_CSS = "style.css";
-
+    private static final String STYLE_CSS = "liftboy.css";
     // all parts
     private TextField editableNode;
     private Popup popup;
     private Pane dropDownChooser;
     private Button chooserButton;
-
     private StackPane drawingPane;
-
     private Animation invalidInputAnimation;
     private FadeTransition fadeOutValidIconAnimation;
-
-
     LiftboySkin(Liftboy control) {
         super(control);
         initializeSelf();
@@ -332,14 +299,29 @@ class LiftboySkin extends SkinBase<Liftboy> {
         }
         invalidInputAnimation.play();
     }
+
+    private enum State {
+        VALID("Valid",      "valid.png"),
+        INVALID("Invalid",  "invalid.png");
+
+        public final String    text;
+        public final ImageView imageView;
+
+        State(final String text, final String file) {
+            this.text = text;
+            String url = LiftboySkin.class.getResource("/icons/" + file).toExternalForm();
+            this.imageView = new ImageView(new Image(url,
+                    IMG_SIZE, IMG_SIZE,
+                    true, false));
+        }
+    }
 }
 
 class LiftboyDropDown extends BorderPane {
     private static final String FONTS_CSS = "/fonts/fonts.css";
-    private static final String STYLE_CSS = "style.css";
+    private static final String STYLE_CSS = "liftboy.css";
 
     private final Liftboy liftboy;
-
 
     private VBox terminal = new VBox();
     private HBox firstRow = new HBox();
@@ -347,11 +329,8 @@ class LiftboyDropDown extends BorderPane {
     private HBox thirdRow = new HBox();
     private HBox fourthRow = new HBox();
 
-
     private Image elevatorBoy;
     private ImageView elevatorBoyView;
-
-
 
     private Label nameLabel;
     private Label floorLabel;
@@ -381,8 +360,6 @@ class LiftboyDropDown extends BorderPane {
     private void initializeSelf() {
         getStyleClass().add("liftboy-drop-down-chooser");
 
-
-
         String fonts = getClass().getResource(FONTS_CSS).toExternalForm();
         getStylesheets().add(fonts);
 
@@ -409,9 +386,6 @@ class LiftboyDropDown extends BorderPane {
         elevatorBoy = new Image("pictures/elevatorBoy.png");
         elevatorBoyView = new ImageView(elevatorBoy);
 
-
-
-
         floorLabel.getStyleClass().add("floor-label");
         nameLabel.getStyleClass().add("name-label");
 
@@ -428,19 +402,15 @@ class LiftboyDropDown extends BorderPane {
         clearButton.getStyleClass().add("button");
         alarmButton.getStyleClass().add("button-alarm");
 
+
         terminal.setSpacing(10);
         firstRow.setSpacing(10);
         secondRow.setSpacing(10);
         thirdRow.setSpacing(10);
         fourthRow.setSpacing(10);
-
-//        nameLabel.setMinWidth();
-
     }
 
     private void layoutParts() {
-
-
         firstRow.getChildren().addAll(sevenButton, eightButton, nineButton);
         secondRow.getChildren().addAll(fourButton, fiveButton, sixButton);
         thirdRow.getChildren().addAll(oneButton, twoButton, threeButton);
@@ -451,7 +421,6 @@ class LiftboyDropDown extends BorderPane {
         setTop(nameLabel);
         setLeft(elevatorBoyView);
         setRight(terminal);
-
     }
 
     private void setupEventHandlers(){
@@ -500,7 +469,6 @@ class LiftboyDropDown extends BorderPane {
             liftboy.userFacingTextProperty().setValue("0");
         });
 
-
         alarmButton.setOnAction(event -> {
 
             String musicFile = "src/main/resources/music/elevatorMusic.wav";
@@ -509,7 +477,6 @@ class LiftboyDropDown extends BorderPane {
             MediaPlayer mediaPlayer = new MediaPlayer(sound);
             mediaPlayer.play();
 
-
             try {
                 Desktop.getDesktop().browse(new URI("https://www.schindler.com/ch/internet/de/ueber-schindler-schweiz/kontakt.html#button"));
             } catch (IOException e1){
@@ -517,19 +484,12 @@ class LiftboyDropDown extends BorderPane {
             }catch (URISyntaxException e2){
                 e2.printStackTrace();
             }
-
         });
-
     }
-
-
     private void setupBindings() {
         floorLabel.textProperty().bind(liftboy.userFacingTextProperty());
-        nameLabel.textProperty().bind(liftboy.labelProperty());
-
+        nameLabel.textProperty().bind(liftboy.buildingNameProperty());
     }
-
-
     private void buttonPush(String number){
         if (liftboy.userFacingTextProperty().getValue() =="0"){
             liftboy.userFacingTextProperty().setValue(number);

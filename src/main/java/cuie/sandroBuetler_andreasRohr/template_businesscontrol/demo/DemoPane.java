@@ -13,11 +13,11 @@ import cuie.sandroBuetler_andreasRohr.template_businesscontrol.Liftboy;
 class DemoPane extends BorderPane {
     private Liftboy liftboy;
 
-    private Slider ageSlider;
+    private Slider stockwerkSlider;
 
     private CheckBox  readOnlyBox;
     private CheckBox  mandatoryBox;
-    private TextField labelField;
+    private TextField buildingName;
 
     private PresentationModel model;
 
@@ -35,25 +35,17 @@ class DemoPane extends BorderPane {
 
         liftboy = new Liftboy();
 
-        ageSlider = new Slider(0, 130, 0);
+        stockwerkSlider = new Slider(0, 130, 0);
 
-        readOnlyBox = new CheckBox();
-        readOnlyBox.setSelected(false);
-
-        mandatoryBox = new CheckBox();
-        mandatoryBox.setSelected(true);
-
-        labelField = new TextField();
+        buildingName = new TextField();
     }
 
     private void layoutControls() {
         setCenter(liftboy);
         VBox box = new VBox(10,
                             new Label("Business Control Properties"),
-                            new Label("Age")      , ageSlider,
-                            new Label("readOnly") , readOnlyBox,
-                            new Label("mandatory"), mandatoryBox,
-                            new Label("Label")    , labelField);
+                            new Label("Stockwer")      , stockwerkSlider,
+                            new Label("Hausname")    , buildingName);
         box.setPadding(new Insets(10));
         box.setSpacing(10);
         setRight(box);
@@ -63,14 +55,11 @@ class DemoPane extends BorderPane {
     }
 
     private void setupBindings() {
-        ageSlider.valueProperty()      .bindBidirectional(model.ageProperty());
-        labelField.textProperty()      .bindBidirectional(model.age_LabelProperty());
-        readOnlyBox.selectedProperty() .bindBidirectional(model.age_readOnlyProperty());
-        mandatoryBox.selectedProperty().bindBidirectional(model.age_mandatoryProperty());
+        stockwerkSlider.valueProperty()      .bindBidirectional(model.ageProperty());
+        buildingName.textProperty()      .bindBidirectional(model.age_LabelProperty());
 
-
-        liftboy.valueProperty()    .bindBidirectional(model.ageProperty());
-        liftboy.labelProperty()    .bind(model.age_LabelProperty());
+        liftboy.stockwerkProperty()    .bindBidirectional(model.ageProperty());
+        liftboy.buildingNameProperty()    .bind(model.age_LabelProperty());
     }
 
 }

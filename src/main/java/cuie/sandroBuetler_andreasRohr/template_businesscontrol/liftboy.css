@@ -80,8 +80,8 @@
 }
 .liftboy-drop-down-chooser .button{
     -fx-background-image: url("/pictures/Cuie_Button.png");
-    -fx-background-color: blank;
     -fx-border-width: 0;
+    -fx-background-color: transparent;
     -fx-text-alignment: center;
     -fx-min-height: 50px;
     -fx-min-width: 50px;
@@ -91,8 +91,8 @@
 .liftboy-drop-down-chooser .button:hover{
 
     -fx-background-image: url("/pictures/Cuie_Button_Active.png");
-    -fx-background-color: blank;
     -fx-border-width: 0;
+    -fx-background-color: transparent;
     -fx-text-alignment: center;
     -fx-min-height: 50px;
     -fx-min-width: 50px;
@@ -101,16 +101,16 @@
 .liftboy-drop-down-chooser .button-alarm{
 
     -fx-background-image: url("/pictures/Cuie_Button_Bell.png");
-    -fx-background-color: blank;
     -fx-border-width: 0;
+    -fx-background-color: transparent;
     -fx-text-alignment: center;
     -fx-min-height: 50px;
     -fx-min-width: 50px;
 }
 .liftboy-drop-down-chooser .button-alarm:hover{
     -fx-background-image: url("/pictures/Cuie_Button_Bell_Active.png");
-    -fx-background-color: blank;
     -fx-border-width: 0;
+    -fx-background-color: transparent;
     -fx-text-alignment: center;
     -fx-min-height: 50px;
     -fx-min-width: 50px;
@@ -130,6 +130,7 @@
     -fx-font-family: "Zapfino";
     -fx-text-fill: gold;
     -fx-background-color: brown;
+    -fx-min-width: 360px;
 }
 
 
