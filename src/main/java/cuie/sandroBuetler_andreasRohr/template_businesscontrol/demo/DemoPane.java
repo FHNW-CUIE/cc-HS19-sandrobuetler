@@ -8,10 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-import cuie.sandroBuetler_andreasRohr.template_businesscontrol.BusinessControl;
+import cuie.sandroBuetler_andreasRohr.template_businesscontrol.Liftboy;
 
 class DemoPane extends BorderPane {
-    private BusinessControl businessControl;
+    private Liftboy liftboy;
 
     private Slider ageSlider;
 
@@ -33,7 +33,7 @@ class DemoPane extends BorderPane {
     private void initializeControls() {
         setPadding(new Insets(10));
 
-        businessControl = new BusinessControl();
+        liftboy = new Liftboy();
 
         ageSlider = new Slider(0, 130, 0);
 
@@ -47,7 +47,7 @@ class DemoPane extends BorderPane {
     }
 
     private void layoutControls() {
-        setCenter(businessControl);
+        setCenter(liftboy);
         VBox box = new VBox(10,
                             new Label("Business Control Properties"),
                             new Label("Age")      , ageSlider,
@@ -68,10 +68,9 @@ class DemoPane extends BorderPane {
         readOnlyBox.selectedProperty() .bindBidirectional(model.age_readOnlyProperty());
         mandatoryBox.selectedProperty().bindBidirectional(model.age_mandatoryProperty());
 
-        businessControl.valueProperty()    .bindBidirectional(model.ageProperty());
-        businessControl.labelProperty()    .bind(model.age_LabelProperty());
-        businessControl.readOnlyProperty() .bind(model.age_readOnlyProperty());
-        businessControl.mandatoryProperty().bind(model.age_mandatoryProperty());
+
+        liftboy.valueProperty()    .bindBidirectional(model.ageProperty());
+        liftboy.labelProperty()    .bind(model.age_LabelProperty());
     }
 
 }
