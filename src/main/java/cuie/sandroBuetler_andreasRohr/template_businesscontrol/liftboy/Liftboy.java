@@ -1,4 +1,4 @@
-package cuie.sandroBuetler_andreasRohr.template_businesscontrol;
+package cuie.sandroBuetler_andreasRohr.template_businesscontrol.liftboy;
 
 import java.awt.*;
 import java.io.File;
@@ -29,6 +29,16 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Popup;
 import javafx.util.Duration;
+
+/**
+@author
+@DieterHolz -> template
+
+@SandroBütler
+@AndreasRohr
+
+ LiftBoy is a CustomControl for the OOPL2 project SkyscraperFX, an implementation guide is provided in the GIT-Repo.
+*/
 
 public class Liftboy extends Control {
     static final String FORMATTED_INTEGER_PATTERN = "%,d";

@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-import cuie.sandroBuetler_andreasRohr.template_businesscontrol.Liftboy;
+import cuie.sandroBuetler_andreasRohr.template_businesscontrol.liftboy.Liftboy;
 
 class DemoPane extends BorderPane {
     private Liftboy liftboy;
@@ -44,7 +44,7 @@ class DemoPane extends BorderPane {
         setCenter(liftboy);
         VBox box = new VBox(10,
                             new Label("Business Control Properties"),
-                            new Label("Stockwer")      , stockwerkSlider,
+                            new Label("Stockwerk")      , stockwerkSlider,
                             new Label("Hausname")    , buildingName);
         box.setPadding(new Insets(10));
         box.setSpacing(10);
